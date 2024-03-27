@@ -7,7 +7,7 @@ public class BookCreationDTO {
 	private String title;
 	private String author;
 	private String description;
-	private Date publishedDate;
+	private Integer publishedDate;
 	private List<String> categoriesNames;
 	
 	public String getTitle() {
@@ -22,7 +22,7 @@ public class BookCreationDTO {
 		return description;
 	}
 	
-	public Date getPublishedDate() {
+	public Integer getPublishedDate() {
 		return publishedDate;
 	}
 	

@@ -1,7 +1,9 @@
 package com.mk.bibliotheque.controllers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.mk.bibliotheque.interfaces.services.IBookService;
 import com.mk.bibliotheque.models.Book;
@@ -51,5 +54,11 @@ public class BookController {
 	public ResponseEntity<String> deleteBook(@PathVariable int id) throws NoSuchElementException, Exception {
 		bookService.deleteBook(id);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<List<Book>> searchBooks(@RequestParam Map<String, String> lstParams) {
+		List<Book> lstBooks = bookService.searchBooks(lstParams);
+		return new ResponseEntity<>(lstBooks, HttpStatus.OK);
 	}
 }

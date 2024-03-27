@@ -1,13 +1,14 @@
 package com.mk.bibliotheque.services;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.mk.bibliotheque.exceptions.NotFoundException;
 import com.mk.bibliotheque.interfaces.services.IBookService;
 import com.mk.bibliotheque.models.Author;
 import com.mk.bibliotheque.models.Book;
@@ -36,14 +37,14 @@ public class BookService implements IBookService {
 
 	@Override
 	public List<Book> getBooks() {
-		List<Book> lstBooks = bookRepository.findAll();
+		List<Book> lstBooks = (List<Book>) bookRepository.findAll();
 		return lstBooks;
 	}
 
 	@Override
 	public void createBook(BookCreationDTO book) {
 		Book bookCreated = new Book(book.getTitle(), book.getDescription(), book.getPublishedDate());
-		List<Category> bookCategories = new ArrayList<>();
+		Set<Category> bookCategories = new HashSet<>();
 		for (String categoryName : book.getCategoriesNames()) {
 			Category category = categoryRepository.findByName(categoryName);
 			if(null != category) {
@@ -81,6 +82,12 @@ public class BookService implements IBookService {
 		} else {
 			throw new NoSuchElementException("Book not found with id: " + id);
 		}
+	}
+	
+	@Override
+	public List<Book> searchBooks(Map<String, String> lstParams) {
+		List<Book> lstBooks = bookRepository.advancedSearchBooks(lstParams);
+		return lstBooks;
 	}
 
 }

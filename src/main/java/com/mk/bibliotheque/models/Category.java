@@ -1,6 +1,6 @@
 package com.mk.bibliotheque.models;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,7 +17,7 @@ public class Category {
 	private String name;
 	@ManyToMany(mappedBy = "lstCategories")
 	@JsonIgnore
-	private List<Book> lstBooks;
+	private Set<Book> lstBooks;
 	
 	public Category() {
 		
@@ -43,11 +43,11 @@ public class Category {
 		this.name = name;
 	}
 
-	public List<Book> getLstBooks() {
+	public Set<Book> getLstBooks() {
 		return lstBooks;
 	}
 
-	public void setLstBooks(List<Book> lstBooks) {
+	public void setLstBooks(Set<Book> lstBooks) {
 		this.lstBooks = lstBooks;
 	}
 	

@@ -2,6 +2,7 @@ package com.mk.bibliotheque.models;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -19,29 +20,30 @@ public class Book {
 	private int id;
 	private String title;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "owner_id")
+	@JoinColumn(name = "author_id")
 	private Author author;
 	private String description;
-	private Date publishedDate;
+	private Integer publishedDate;
+	private Date createdAt = new Date();
 	@ManyToMany
 	@JoinTable(
 			name = "book_category",
 			joinColumns = @JoinColumn(name = "book_id"),
 			inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private List<Category> lstCategories;
+	private Set<Category> lstCategories;
 	
 	public Book() {}
 	
-	public Book(String title, String description, Date publishedIn) {
+	public Book(String title, String description, Integer publishedDate) {
 		this.title = title;
 		this.description = description;
-		this.publishedDate = publishedIn;
+		this.publishedDate = publishedDate;
 	}
 	
-	public Book(String title, String description, Date publishedIn, Author author) {
+	public Book(String title, String description, Integer publishedDate, Author author) {
 		this.title = title;
 		this.description = description;
-		this.publishedDate = publishedIn;
+		this.publishedDate = publishedDate;
 		this.author = author;
 	}
 
@@ -77,20 +79,28 @@ public class Book {
 		this.description = description;
 	}
 
-	public Date getPublishedIn() {
+	public Integer getPublishedDate() {
 		return publishedDate;
 	}
 
-	public void setPublishedIn(Date publishedIn) {
-		this.publishedDate = publishedIn;
+	public void setPublishedDate(Integer publishedDate) {
+		this.publishedDate = publishedDate;
 	}
 
-	public List<Category> getLstCategories() {
+	public Set<Category> getLstCategories() {
 		return lstCategories;
 	}
 
-	public void setLstCategories(List<Category> lstCategories) {
+	public void setLstCategories(Set<Category> lstCategories) {
 		this.lstCategories = lstCategories;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 	
 	

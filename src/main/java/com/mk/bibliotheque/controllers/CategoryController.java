@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,18 +40,21 @@ public class CategoryController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<String> createCategory(@RequestBody CategoryCreationDTO category) throws InvalidFormException, Exception {
 			categoryService.createCategory(category);
 			return new ResponseEntity<>("Category created", HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Category> updateCategory(@PathVariable int id, @RequestBody Category category) throws NoSuchElementException, InvalidFormException {
 			Category categoryUpdated = categoryService.updateCategory(id, category);
 			return new ResponseEntity<>(categoryUpdated, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<String> deleteCategory(@PathVariable int id) {
 		try {
 			categoryService.deleteCategory(id);

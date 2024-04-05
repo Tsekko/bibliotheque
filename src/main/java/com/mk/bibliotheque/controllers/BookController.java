@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,18 +40,21 @@ public class BookController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<String> createBook(@RequestBody BookCreationDTO book) {
 		bookService.createBook(book);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody Book book) throws NoSuchElementException, Exception {
 		Book bookUpdated = bookService.updateBook(id, book);
 		return new ResponseEntity<>(bookUpdated, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<String> deleteBook(@PathVariable int id) throws NoSuchElementException, Exception {
 		bookService.deleteBook(id);
 		return new ResponseEntity<>(HttpStatus.OK);

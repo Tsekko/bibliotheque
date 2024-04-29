@@ -28,13 +28,13 @@ public class AuthorController {
 	@GetMapping
 	public ResponseEntity<List<Author>> getAllAuthors() {
 		List<Author> lstAuthors = authorService.getAuthors();
-		return new ResponseEntity<List<Author>>(lstAuthors, HttpStatus.OK);
+		return new ResponseEntity<>(lstAuthors, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Author> getAuthorById(@PathVariable int id) throws NoSuchElementException, Exception {
 		Author author = authorService.getAuthorById(id);
-		return new ResponseEntity<Author>(author, HttpStatus.OK);
+		return new ResponseEntity<>(author, HttpStatus.OK);
 	}
 	
 	@PostMapping
@@ -48,7 +48,7 @@ public class AuthorController {
 	public ResponseEntity<Author> updateAuthor(@PathVariable int id, @RequestBody Author author) throws NoSuchElementException, Exception {
 		try {
 			Author authorUpdated = authorService.updateAuthor(id, author);
-			return new ResponseEntity<Author>(authorUpdated, HttpStatus.OK);
+			return new ResponseEntity<>(authorUpdated, HttpStatus.OK);
 		} catch (NotFoundException authorException) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (Exception unknownException) {

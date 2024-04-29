@@ -26,30 +26,30 @@ public class BorrowController {
 	@GetMapping
 	public ResponseEntity<List<Borrow>> getBorrows() throws Exception {
 		List<Borrow> lstBorrows = borrowService.getBorrows();
-		return new ResponseEntity<List<Borrow>>(lstBorrows, HttpStatus.OK);
+		return new ResponseEntity<>(lstBorrows, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<BorrowDTO> getBorrowById(@PathVariable int id) throws Exception {
 		BorrowDTO borrow = borrowService.getBorrowById(id);
-		return new ResponseEntity<BorrowDTO>(borrow, HttpStatus.OK);
+		return new ResponseEntity<>(borrow, HttpStatus.OK);
 	}
 	
 	@PostMapping
 	public ResponseEntity<String> createBorrow(@RequestBody BorrowCreationDTO borrow) throws Exception {
 		borrowService.createBorrow(borrow);
-		return new ResponseEntity<String>("Borrow successfully registered", HttpStatus.CREATED);
+		return new ResponseEntity<>("Borrow successfully registered", HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/book/{id}")
-	public ResponseEntity<BorrowDTO> getBorrowByBookId(@PathVariable int id) throws Exception {
-		BorrowDTO borrow = borrowService.getBorrowByBookId(id);
-		return new ResponseEntity<BorrowDTO>(borrow, HttpStatus.OK);
+	public ResponseEntity<List<BorrowDTO>> getBorrowByBookId(@PathVariable int id) throws Exception {
+		List<BorrowDTO> borrow = borrowService.getBorrowsByBookId(id);
+		return new ResponseEntity<>(borrow, HttpStatus.OK);
 	}
 	
 	@GetMapping("/user/{id}")
 	public ResponseEntity<BorrowDTO> getBorrowByUserId(@PathVariable int id) throws Exception {
 		BorrowDTO borrow = borrowService.getBorrowByUserId(id);
-		return new ResponseEntity<BorrowDTO>(borrow, HttpStatus.OK);
+		return new ResponseEntity<>(borrow, HttpStatus.OK);
 	}
 }

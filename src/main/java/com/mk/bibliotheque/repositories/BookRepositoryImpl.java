@@ -32,7 +32,6 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 		CriteriaBuilder queryBuild = em.getCriteriaBuilder();
 		CriteriaQuery<Book> query = queryBuild.createQuery(Book.class);
 		Root<Book> root = query.from(Book.class);
-		//ListJoin<Book, Author> authors = root.joinList("author");
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		for(String key : queryParams.keySet()) {
 			switch (key) {
@@ -79,10 +78,6 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 				break;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + key);
-			/*
-			 * case "authorName": predicates.add(queryBuild.like(authors.get(), null));
-			 * break;
-			 */
 			}
 		}
 		Predicate[] predicateArray = predicates.toArray(new Predicate[predicates.size()]);

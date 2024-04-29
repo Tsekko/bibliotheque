@@ -2,6 +2,8 @@ package com.mk.bibliotheque.models.dtos;
 
 import java.util.Date;
 
+import com.mk.bibliotheque.models.Borrow;
+
 public class BorrowDTO {
 	private String titleBook;
 	private String authorName;
@@ -17,6 +19,15 @@ public class BorrowDTO {
 		this.borrowedAt = borrowedAt;
 		this.dueTo = dueTo;
 		this.hasBeenRestitued = hasBeenRestitued;
+	}
+	
+	public BorrowDTO(Borrow borrow) {
+		this.titleBook = borrow.getCopy().getBook().getTitle();
+		this.authorName = borrow.getCopy().getBook().getAuthor().getAuthorName();
+		this.userEmail = borrow.getUser().getEmail();
+		this.borrowedAt = borrow.getCreatedAt();
+		this.dueTo = borrow.getDueDate();
+		this.hasBeenRestitued = borrow.getIsRestitued();
 	}
 
 	public String getTitleBook() {

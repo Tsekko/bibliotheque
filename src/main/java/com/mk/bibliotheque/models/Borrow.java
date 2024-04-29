@@ -18,8 +18,8 @@ public class Borrow {
 	@GeneratedValue
 	private Integer id;
 	@ManyToOne
-	@JoinColumn(name="book_id")
-	private Book book;
+	@JoinColumn(name="copy_id")
+	private Copy copy;
 	@ManyToOne
 	@JoinColumn(name="customer_id")
 	private User user;
@@ -29,16 +29,16 @@ public class Borrow {
 	
 	public Borrow() {}
 	
-	public Borrow(Book book, User user) {
+	public Borrow(Copy copy, User user) {
 		Calendar calendar = new GregorianCalendar();
 		calendar.add(Calendar.DAY_OF_MONTH, 21);
-		this.book = book;
+		this.copy = copy;
 		this.user = user;
 		this.dueDate = calendar.getTime();
 	}
 	
-	public Borrow(Book book, User user, Date dueDate) {
-		this.book = book;
+	public Borrow(Copy copy, User user, Date dueDate) {
+		this.copy = copy;
 		this.user = user;
 		this.dueDate = dueDate;
 	}
@@ -51,12 +51,12 @@ public class Borrow {
 		this.id = id;
 	}
 
-	public Book getBook() {
-		return book;
+	public Copy getCopy() {
+		return copy;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setCopy(Copy copy) {
+		this.copy = copy;
 	}
 
 	public User getUser() {

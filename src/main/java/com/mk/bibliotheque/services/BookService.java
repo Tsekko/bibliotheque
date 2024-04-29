@@ -13,10 +13,12 @@ import com.mk.bibliotheque.interfaces.services.IBookService;
 import com.mk.bibliotheque.models.Author;
 import com.mk.bibliotheque.models.Book;
 import com.mk.bibliotheque.models.Category;
+import com.mk.bibliotheque.models.Copy;
 import com.mk.bibliotheque.models.dtos.BookCreationDTO;
 import com.mk.bibliotheque.repositories.AuthorRepository;
 import com.mk.bibliotheque.repositories.BookRepository;
 import com.mk.bibliotheque.repositories.CategoryRepository;
+import com.mk.bibliotheque.repositories.CopyRepository;
 
 @Component
 public class BookService implements IBookService {
@@ -28,6 +30,9 @@ public class BookService implements IBookService {
 	
 	@Autowired
 	private AuthorRepository authorRepository;
+	
+	@Autowired
+	private CopyRepository copyRepository;
 	
 	@Override
 	public Book getBookById(int id) {
@@ -65,6 +70,8 @@ public class BookService implements IBookService {
 		}
 		bookCreated.setAuthor(author);
 		bookRepository.saveAndFlush(bookCreated);
+		Copy copy = new Copy(bookCreated);
+		copyRepository.saveAndFlush(copy);
 	}
 
 	@Override

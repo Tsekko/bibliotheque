@@ -58,6 +58,6 @@ class AuthorServiceTest {
 		when(authorRepository.findAll()).thenReturn(lstAuthors);
 		List<Author> lstAuthorRetrieved = authorService.getAuthors();
 		verify(authorRepository).findAll();
-		assertEquals(lstAuthorRetrieved.size(), 2);
+		assertEquals(2, lstAuthorRetrieved.size());
 	}
 }

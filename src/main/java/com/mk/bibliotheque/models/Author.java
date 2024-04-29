@@ -50,4 +50,8 @@ public class Author {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public String getAuthorName() {
+		return this.firstName + " " + this.lastName;
+	}
 }

@@ -45,9 +45,17 @@ public class BorrowService implements IBorrowService {
 		
 		User user = userRepository.findByEmail(borrow.getEmailUser()).orElseThrow();
 		
+		if (borrowRepository.existsByUserIdAndIsRestituedFalse(user.getId())) {
+			throw new Exception("User cannot borrow a book");
+		}
+		
 		Borrow borrowToCreate = new Borrow(copy, user);
 		
 		borrowRepository.saveAndFlush(borrowToCreate);
+		
+		copy.setAvailable(false);
+		
+		copyRepository.saveAndFlush(copy);
 	}
 
 	@Override

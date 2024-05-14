@@ -1,7 +1,6 @@
 package com.mk.bibliotheque.services;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.mk.bibliotheque.exceptions.InvalidFormException;
-import com.mk.bibliotheque.models.Category;
 import com.mk.bibliotheque.models.dtos.CategoryCreationDTO;
 import com.mk.bibliotheque.repositories.CategoryRepository;
 

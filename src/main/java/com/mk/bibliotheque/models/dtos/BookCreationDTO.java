@@ -1,6 +1,5 @@
 package com.mk.bibliotheque.models.dtos;
 
-import java.util.Date;
 import java.util.List;
 
 public class BookCreationDTO {

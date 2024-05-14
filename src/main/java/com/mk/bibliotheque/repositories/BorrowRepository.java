@@ -12,4 +12,5 @@ import com.mk.bibliotheque.models.Borrow;
 public interface BorrowRepository extends JpaRepository<Borrow, Integer>, BorrowRepositoryCustom {
 	Optional<Borrow> findByCopyId(int id);
 	Optional<Borrow> findByUserId(int id);
+	Boolean existsByUserIdAndIsRestituedFalse(long userId);
 }

@@ -3,6 +3,7 @@ package com.mk.bibliotheque.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.mk.bibliotheque.interfaces.services.ICopyService;
 import com.mk.bibliotheque.models.Book;
@@ -10,6 +11,7 @@ import com.mk.bibliotheque.models.Copy;
 import com.mk.bibliotheque.repositories.BookRepository;
 import com.mk.bibliotheque.repositories.CopyRepository;
 
+@Component
 public class CopyService implements ICopyService {
 	@Autowired
 	CopyRepository copyRepository;

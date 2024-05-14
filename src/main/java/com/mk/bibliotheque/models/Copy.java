@@ -1,9 +1,12 @@
 package com.mk.bibliotheque.models;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -13,7 +16,7 @@ import jakarta.persistence.Table;
 @Table(name = "copies")
 public class Copy {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne
 	@JoinColumn(name = "book_id")
@@ -22,6 +25,7 @@ public class Copy {
 	@Enumerated(EnumType.STRING)
 	private CopyState status;
 	private boolean isAvailable = true;
+	private Date createdAt = new Date();
 	
 	public Copy() {
 		

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.mk.bibliotheque.exceptions.ClosedException;
 import com.mk.bibliotheque.exceptions.InvalidFormException;
 import com.mk.bibliotheque.models.ApiError;
 import com.mk.bibliotheque.security.jwt.AuthEntryPointJwt;
@@ -43,6 +44,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(AccessDeniedException.class)
 	protected ResponseEntity<Object> handleAccessDenied(AccessDeniedException ex) {
 		ApiError apiError = new ApiError(HttpStatus.FORBIDDEN);
+		apiError.setMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
+	}
+	
+	@ExceptionHandler(ClosedException.class)
+	protected ResponseEntity<Object> handleClosed(ClosedException ex) {
+		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
 		apiError.setMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
 	}

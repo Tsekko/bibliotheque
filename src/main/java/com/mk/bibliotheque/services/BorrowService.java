@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mk.bibliotheque.exceptions.ClosedException;
 import com.mk.bibliotheque.interfaces.services.IBorrowService;
 import com.mk.bibliotheque.models.Borrow;
 import com.mk.bibliotheque.models.Copy;
@@ -45,7 +46,7 @@ public class BorrowService implements IBorrowService {
 		
 		User user = userRepository.findByEmail(borrow.getEmailUser()).orElseThrow();
 		
-		if (borrowRepository.existsByUserIdAndIsRestituedFalse(user.getId())) {
+		if (borrowRepository.existsByUserIdAndIsRestitutedFalse(user.getId())) {
 			throw new Exception("User cannot borrow a book");
 		}
 		
@@ -81,9 +82,15 @@ public class BorrowService implements IBorrowService {
 	}
 
 	@Override
-	public void endBorrow(int id) throws NoSuchElementException {
+	public void endBorrow(int id) throws NoSuchElementException, ClosedException {
 		Borrow borrow = borrowRepository.findById(id).orElseThrow();
-		borrow.hasBeenRestitued(true);
-		borrowRepository.saveAndFlush(borrow);		
+		if (borrow.getIsRestituted()) {
+			throw new ClosedException("Book already restituted");
+		}
+		borrow.hasBeenRestituted(true);
+		borrow.getCopy().addOneBorrow();
+		borrow.getCopy().setAvailable(true);
+		borrowRepository.saveAndFlush(borrow);
+		copyRepository.saveAndFlush(borrow.getCopy());
 	}
 }

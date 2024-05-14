@@ -26,7 +26,7 @@ public class Borrow {
 	private User user;
 	private Date createdAt = new Date();
 	private Date dueDate;
-	private Boolean isRestitued = false;
+	private Boolean isRestituted = false;
 	
 	public Borrow() {}
 	
@@ -84,12 +84,12 @@ public class Borrow {
 		this.dueDate = dueDate;
 	}
 
-	public Boolean getIsRestitued() {
-		return isRestitued;
+	public Boolean getIsRestituted() {
+		return isRestituted;
 	}
 
-	public void hasBeenRestitued(Boolean restitued) {
-		this.isRestitued = restitued;
+	public void hasBeenRestituted(Boolean restituted) {
+		this.isRestituted = restituted;
 	}
 	
 	

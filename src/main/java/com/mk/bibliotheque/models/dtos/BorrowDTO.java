@@ -10,15 +10,15 @@ public class BorrowDTO {
 	private String userEmail;
 	private Date borrowedAt;
 	private Date dueTo;
-	private boolean hasBeenRestitued;
+	private boolean hasBeenRestituted;
 	
-	public BorrowDTO(String titleBook, String authorName, String userEmail, Date borrowedAt, Date dueTo, boolean hasBeenRestitued) {
+	public BorrowDTO(String titleBook, String authorName, String userEmail, Date borrowedAt, Date dueTo, boolean hasBeenRestituted) {
 		this.titleBook = titleBook;
 		this.authorName = authorName;
 		this.userEmail = userEmail;
 		this.borrowedAt = borrowedAt;
 		this.dueTo = dueTo;
-		this.hasBeenRestitued = hasBeenRestitued;
+		this.hasBeenRestituted = hasBeenRestituted;
 	}
 	
 	public BorrowDTO(Borrow borrow) {
@@ -27,7 +27,7 @@ public class BorrowDTO {
 		this.userEmail = borrow.getUser().getEmail();
 		this.borrowedAt = borrow.getCreatedAt();
 		this.dueTo = borrow.getDueDate();
-		this.hasBeenRestitued = borrow.getIsRestitued();
+		this.hasBeenRestituted = borrow.getIsRestituted();
 	}
 
 	public String getTitleBook() {
@@ -70,12 +70,12 @@ public class BorrowDTO {
 		this.dueTo = dueTo;
 	}
 
-	public boolean isHasBeenRestitued() {
-		return hasBeenRestitued;
+	public boolean isHasBeenRestituted() {
+		return hasBeenRestituted;
 	}
 
-	public void setHasBeenRestitued(boolean hasBeenRestitued) {
-		this.hasBeenRestitued = hasBeenRestitued;
+	public void setHasBeenRestituted(boolean hasBeenRestituted) {
+		this.hasBeenRestituted = hasBeenRestituted;
 	}
 	
 	

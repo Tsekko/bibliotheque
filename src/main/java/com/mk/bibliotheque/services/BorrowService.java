@@ -87,9 +87,7 @@ public class BorrowService implements IBorrowService {
 		if (borrow.getIsRestituted()) {
 			throw new ClosedException("Book already restituted");
 		}
-		borrow.hasBeenRestituted(true);
-		borrow.getCopy().addOneBorrow();
-		borrow.getCopy().setAvailable(true);
+		borrow.restituteBorrow();
 		borrowRepository.saveAndFlush(borrow);
 		copyRepository.saveAndFlush(borrow.getCopy());
 	}

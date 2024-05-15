@@ -92,5 +92,9 @@ public class Borrow {
 		this.isRestituted = restituted;
 	}
 	
-	
+	public void restituteBorrow() {
+		this.copy.addOneBorrow();
+		this.copy.setAvailable(true);
+		this.hasBeenRestituted(true);
+	}
 }
